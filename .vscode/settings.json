@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "assert.h": "c",
+        "flat_set": "c"
+    }
+}
