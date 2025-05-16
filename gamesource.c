@@ -94,13 +94,13 @@ int main(void)
 	clear();       // PDCurses の画面クリア
 	refresh();     // 表示を更新
 
-	printw("*************************************************************************************\n");
+	printw("		*************************************************************************************\n");
 	refresh();
 
-	printw("Welcome to TAKEMON\n");
+	printw("		Welcome to TAKEMON\n");
 	refresh();
 	(void)wgetch(stdscr);
-	printw("loading savadata\n1 : yes\n2 : no\n");
+	printw("		loading savadata\n		1 : yes\n		2 : no\n");
 	refresh();
 
 	player_t* pt = NULL;//パーティーへのポインタ
@@ -114,7 +114,7 @@ int main(void)
 	}
 	else {
 
-		printw("Username\nname : ");
+		printw("		Username\n		name : ");
 		refresh();
 
 		char name[16];
@@ -128,12 +128,12 @@ int main(void)
 		print_player(*pt);
 		// while (wgetch(stdscr) != ENTER);
 		pushenter();
-		printw("Start\n");
+		printw("		Start\n");
 		refresh();
 
 		// while (wgetch(stdscr) != ENTER);
 		pushenter();
-		printw("Watch the prologue\n1 : Yes\n2 : No\n");
+		printw("		Watch the prologue\n		1 : Yes\n		2 : No\n");
 		refresh();
 
 		if (yesno() == ONE) {
@@ -145,11 +145,11 @@ int main(void)
 			sndPlaySound(_T("warfight.wav"), SND_ASYNC); //Play sound
 			timeSleep(3500);
 			stopSound();
-			printw("Hero: Ugh... ");
+			printw("		Hero: Ugh...\n");
 			refresh();
 
 			timeSleep(3000);
-			printw("Is this the end...?\n");
+			printw("		Is this the end...?\n");
 			refresh();
 
 			timeSleep(1000);
@@ -160,23 +160,23 @@ int main(void)
 			refresh();     // 表示を更新
 
 			sndPlaySound(_T("bgm1.wav"), SND_ASYNC); //Play sound
-			printw("\n200 years ago, the hero was defeated by the Demon Lord, and the age of demons began.\n");
+			printw("\n		200 years ago, the hero was defeated by the Demon Lord, and the age of demons began.\n");
 			refresh();
 			timeSleep(2500);
 			(void)wgetch(stdscr);
-			printw("Humanity, under the rule of the demons, lives in hardship.\n");
+			printw("		Humanity, under the rule of the demons, lives in hardship.\n");
 			refresh();			
 			timeSleep(2500);
 			(void)wgetch(stdscr);
-			printw(" You set out on a journey to become stronger.\n");
+			printw("		You set out on a journey to become stronger.\n");
 			refresh();
 			timeSleep(2500);
 			(void)wgetch(stdscr);
-			printw("Find allies and defeat the Demon Lord to bring peace back to the world.\n\n");
+			printw("		Find allies and defeat the Demon Lord to bring peace back to the world.\n\n");
 			refresh();
 			timeSleep(2500);
 			(void)wgetch(stdscr);
-			printw("---------------------The First Village-------------------------\n");
+			printw("		---------------------The First Village-------------------------\n");
 			refresh();
 			timeSleep(2500);
 			(void)wgetch(stdscr);
@@ -271,7 +271,7 @@ int main(void)
 				//NR
 			}
 			else if ( p_x== normalsord.x && p_y == normalsord.y ) {
-				printw("You obtained a basic sword!\n");
+				printw("\n		You obtained a basic sword!\n");
 				refresh();
 
 				pushenter();
@@ -281,26 +281,26 @@ int main(void)
 
 			}
 			else if (p_x == 12 && p_y == 10) {
-				printw("\n\nVillager: Are you a traveler ?\n");
+				printw("\n\n		Villager : Are you a traveler ?\n");
 				refresh();
 				pushenter();
-				printw("Villager: I heard the Demon Lord has powerful generals.\n");
+				printw("		Villager : I heard the Demon Lord has powerful generals.\n");
 				refresh();
 				(void)wgetch(stdscr);
-				printw("Villager: One of them is said to be in the cave near this town...\n");
+				printw("		Villager : One of them is said to be in the cave near this town...\n");
 				refresh();
 				(void)wgetch(stdscr);
-				printw("Villager: I hope peace returns soon.\n");
+				printw("		Villager : I hope peace returns soon.\n");
 				refresh();
 				(void)wgetch(stdscr);
 				p_x = tmpx;
 				p_y = tmpy;
 			}
 			else if (p_x == 6 && p_y == 42) {
-				printw("\n\nVillager: Oh dear...\n");
+				printw("\n\n		Villager : Oh dear...\n");
 				refresh();
 				pushenter();
-				printw("Villager: There is a demon cave to the east, and we’re too scared to even leave town.\n");
+				printw("		Villager : There is a demon cave to the east, and we’re too scared to even leave town.\n");
 				refresh();
 				(void)wgetch(stdscr);
 				p_x = tmpx;
@@ -321,9 +321,9 @@ int main(void)
 				else {
 					//NR
 				}
-				printw("Continue the game\n");
+				printw("		Continue the game\n");
 				refresh();
-				printw("1 : Yes\n2 : No\n");
+				printw("		1 : Yes\n		2 : No\n");
 				refresh();
 				if (yesno() == TWO) {
 					save(pt);
@@ -342,7 +342,7 @@ int main(void)
 	}
 	clear();
 	refresh();
-	printw("You have left the town.\n");
+	printw("		You have left the town.\n");
 	refresh();
 	(void)wgetch(stdscr);	
 
@@ -433,9 +433,9 @@ int main(void)
 			else {
 				//NR
 			}
-			printw("Continue the game\n");
+			printw("		Continue the game\n");
 			refresh();
-			printw("1 : Yes\n2 : No\n");
+			printw("		1 : Yes\n		2 : No\n");
 			refresh();
 
 			if (yesno() == TWO) {
