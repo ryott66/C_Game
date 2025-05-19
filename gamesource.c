@@ -8,7 +8,6 @@
 #include<time.h>
 #include <pdcurses.h>
 #include"gameheader.h"
-#include"gameio.h"
 
 static const equip_t NORMAL_SWORD = {WEAPON, "Nomal Sword", 3, 3, 19};
 
@@ -50,7 +49,6 @@ int main(void)
 
 
 	setlocale(LC_ALL, "");
-	initialSettingGameIO();
 	printTitle();
 	sndPlaySound(_T("start.wav"), SND_ASYNC| SND_LOOP);
 	Sleep(3000);
