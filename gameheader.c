@@ -1,33 +1,30 @@
 ﻿#include "gameio.h"
 #include"gameheader.h"
 #include<stdio.h>
+#include<stdlib.h>
+#include <string.h>
+#include <time.h>
+#include<tchar.h>
 
 #include<windows.h> //for windows HANDL
 #include<mmsystem.h>
-#include<tchar.h>
 #pragma comment(lib,"Winmm.lib") //for windows sndPlay .
-#include<stdlib.h>
-#include <time.h>
 #include <pdcurses.h>
-#include <string.h>
 
-
-#define DEF_UP 0
-#define DEF_DOWN 1
-#define EFFECT_MAGIC 1.3
-#define MP_MAGIC 4
 #define ENEMY1 "SLIME"
 #define ENEMY2 "DOG"
 #define ENEMY3 "STRANGER"
 #define ENEMY4 "GOBLIN"
-#define ONE 0x31
-#define TWO 0x32
-#define THREE 0x33
-#define FOUR 0x34
-#define ENTER 0x0d
-#define TYPEMAP0 0
-#define TYPEMAP1 1
 
+
+
+
+static const int DEF_UP = 0;
+static const int DEF_DOWN = 1;
+static const double EFFECT_MAGIC = 1.3;
+static const int MP_MAGIC = 4;
+static const int TYPEMAP0 = 0;
+static const int TYPEMAP1 = 1;
 
 void printTitle()
 {
@@ -305,9 +302,9 @@ void runBattle(player_t* dt,int maptype)
 					printw("		%s attacks!\n", ene.name);
 					refresh();
 					sndPlaySound(_T("goblin.wav"), SND_ASYNC); //Play sound
-					timeSleep(1000);
+					Sleep(1000);
 					sndPlaySound(_T("attack.wav"), SND_ASYNC);
-					timeSleep(1000);
+					Sleep(1000);
 					sndPlaySound(_T("battle cut2.wav"), SND_ASYNC);
 					dmi = calcDamage(ene.attack,defenceplayer(dt));
 					printw("		You take %d damage!\n", dmi);
@@ -320,7 +317,7 @@ void runBattle(player_t* dt,int maptype)
 						printw("		%s used Swap!\n", ene.name);
 						refresh();
 						sndPlaySound(_T("gobmagic.wav"), SND_ASYNC);
-						timeSleep(3000);
+						Sleep(3000);
 						sndPlaySound(_T("battle cut2.wav"), SND_ASYNC);
 						(void)wgetch(stdscr);
 						swap(&dt->hp, &dt->mp);
@@ -335,7 +332,7 @@ void runBattle(player_t* dt,int maptype)
 						if (cte2 == 0) {
 							if (doublepower(&ene.attack, &ene.defence, rn_db)) {
 								sndPlaySound(_T("gobmagic.wav"), SND_ASYNC);
-								timeSleep(3000);
+								Sleep(3000);
 								sndPlaySound(_T("battle cut.wav"), SND_ASYNC);
 								(void)wgetch(stdscr);
 								printw("		%s's attack and defense have doubled!\n", ene.name);
@@ -358,7 +355,7 @@ void runBattle(player_t* dt,int maptype)
 						refresh();
 						if (cte3 == 0) {
 							sndPlaySound(_T("gobmagic.wav"), SND_ASYNC);
-							timeSleep(3000);
+							Sleep(3000);
 							sndPlaySound(_T("battle cut2.wav"), SND_ASYNC);
 							(void)wgetch(stdscr);
 							type = DEF_UP;
@@ -377,7 +374,7 @@ void runBattle(player_t* dt,int maptype)
 						refresh();
 						if (cte4 == 0) {
 							sndPlaySound(_T("gobmagic.wav"), SND_ASYNC);
-							timeSleep(3000);
+							Sleep(3000);
 							sndPlaySound(_T("battle cut.wav"), SND_ASYNC);
 							(void)wgetch(stdscr);
 							type = DEF_DOWN;
@@ -562,12 +559,12 @@ void print_player(player_t dt1)
     printw("\n\n"); refresh();
 }
 
-player_t* createPlayer(char name[])
+player_t* createPlayer(char name[], int id)
 {
 	player_t* pt = NULL;
 	pt = (player_t*)calloc(1, sizeof(player_t));//callocは領域確保の後、最初のアドレスが返ってくる。→「player_tのアドレス」の型で返ってくるようにキャストする
 	sprintf(pt->name, "%s", name);
-	pt->id = 0;
+	pt->id = id;
 	pt->level = 1;
 	pt->mp = MPFIR;
 	pt->hp = HPFIR;
@@ -609,12 +606,19 @@ player_t* createPlayer(char name[])
 	return pt;
 }
 
-char yesno() {
+bool choose_yes() {
     char input = '0';
-    while (input != ONE && input != TWO) {
+    while (true) {
         input = wgetch(stdscr);
+		if (input == ONE){
+			return true;
+		}else if (input == TWO){
+			return false;
+		}
+		else{
+			//NR
+		}
     }
-    return input;
 }
 
 void pushenter(void)
@@ -726,7 +730,7 @@ void save(player_t* pt)
 {
     printw("		Do you want to save your progress?\n"); refresh();
     printw("		1 : Yes\n		2 : No\n"); refresh();
-    if (yesno() == ONE)
+    if (choose_yes())
     {
         printfile("savedata", pt);
         printw("		Game saved successfully!\n"); refresh();
@@ -734,7 +738,7 @@ void save(player_t* pt)
     }
 }
 
-equip_t equipitem(player_t* dt, equip_t item)
+void equipitem(player_t* dt, equip_t item)
 {
 	switch (item.type) {
 	case 1:
@@ -766,3 +770,7 @@ int defenceplayer(player_t* dt)
 	return ret;
 }
 
+void StopSound(void)
+{
+    sndPlaySound(NULL, SND_ASYNC);
+}
