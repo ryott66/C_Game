@@ -18,7 +18,7 @@
         Copyright &copy; 2013- Keisuke SHIMA All rights reserved.
 ******************************************************************************/
 #pragma once
-#ifndef __INC_GAMEIO_H
+#ifndef __INC_GAMEIO_H //if not defined "..."
 #define __INC_GAMEIO_H
 
 #ifndef GAMEIO_FILEPATH
@@ -104,7 +104,7 @@ extern int isGblWorkPath;
 //*****************************************************************************
 
 //For Windows-------------------------------------------
-#ifdef _WIN32
+#ifdef _WIN32  //if defined "..."
 
 #include <lmcons.h>
 #include <Windows.h>

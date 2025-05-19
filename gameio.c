@@ -40,6 +40,7 @@ int initialSettingGameIO( void )
 }
 
 ///////////////////////////////////////////
+//PDCursesでは不要
 BOOL enable_virtual_terminal_processing(FILE* stream)
 {
     HANDLE handle = (HANDLE)_get_osfhandle(_fileno(stream));

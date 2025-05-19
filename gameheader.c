@@ -2,14 +2,12 @@
 #include"gameheader.h"
 #include<stdio.h>
 
-#include<windows.h>
+#include<windows.h> //for windows HANDL
 #include<mmsystem.h>
 #include<tchar.h>
-#pragma comment(lib,"Winmm.lib")
-#include<assert.h>
+#pragma comment(lib,"Winmm.lib") //for windows sndPlay .
 #include<stdlib.h>
-#include<time.h>
-#include<math.h>
+#include <time.h>
 #include <pdcurses.h>
 #include <string.h>
 
@@ -22,15 +20,6 @@
 #define ENEMY2 "DOG"
 #define ENEMY3 "STRANGER"
 #define ENEMY4 "GOBLIN"
-#define STR_MAX	256
-#define WEAPON	1
-#define ARMOR	2
-#define SHIELD	3
-#define	HELMET	4
-#define	NOEQUIP	0
-#define SIZEMAX 20
-#define HPFIR 35 //HP at first
-#define MPFIR 30// MP at first
 #define ONE 0x31
 #define TWO 0x32
 #define THREE 0x33
@@ -38,9 +27,6 @@
 #define ENTER 0x0d
 #define TYPEMAP0 0
 #define TYPEMAP1 1
-#define MAP_MAXLEN 80
-
-
 
 
 void printTitle()
@@ -68,7 +54,6 @@ void printTitle()
 
     refresh();
 }
-
 
 void printslime()
 {
@@ -99,6 +84,7 @@ void printslime()
     refresh();
 
 }
+
 void printdog()
 {
     printw(
@@ -124,6 +110,7 @@ void printdog()
     refresh();
 
 }
+
 void printboy()
 {
     printw(
@@ -148,6 +135,7 @@ void printboy()
     refresh();
 
 }
+
 void printgoblin()
 {
     printw( "		***********************************************************************\n"
@@ -187,6 +175,7 @@ void printgoblin()
     printw("		***********************************************************************\n\n");
     refresh();
 }
+
 void runBattle(player_t* dt,int maptype)
 {
 	enemy_t ene = { "0" };
@@ -470,9 +459,9 @@ int calcDamage(int attack, int defence)
 	}
 	return dm;
 }
+
 int rand_n(int n)
 {
-	srand((unsigned)time(NULL));
 	n = (int)(rand() % n) + 1;
 	return n;
 }
@@ -494,8 +483,6 @@ void printMap(char map[][MAP_MAXLEN + 1], int row, int column)
     refresh();
 }
 
-
-
 void swap(int* hp, int* mp)
 {
 	int tmp = 0;
@@ -509,6 +496,7 @@ void swap(int* hp, int* mp)
 		//NR
 	}
 }
+
 int doublepower(int* dt1, int* dt2,int n)
 {
 	int ret;
@@ -522,6 +510,7 @@ int doublepower(int* dt1, int* dt2,int n)
 	}
 	return ret;
 }
+
 void changeParam(int* dt, int type)
 {
 	if (type == DEF_UP) {
@@ -533,6 +522,7 @@ void changeParam(int* dt, int type)
 	else {//NR
 	}
 }
+
 void print_player(player_t dt1)
 {
     printw("		id:%d\n", dt1.id); refresh();
@@ -571,6 +561,7 @@ void print_player(player_t dt1)
     }
     printw("\n\n"); refresh();
 }
+
 player_t* createPlayer(char name[])
 {
 	player_t* pt = NULL;
@@ -596,13 +587,12 @@ player_t* createPlayer(char name[])
 	pt->speed = rand_n(6) + 4;
 	printf("%d\n\n", pt->speed);
 	(void)wgetch(stdscr);*/
+
 	pt->power = 5;
 	pt->protect = 5;
 	pt->speed = 5;
 
-
 	pt->exp = 0;
-//	pt->g_rate = (double)(rand_n(9) + (double)10) / (double)10;//1~9 + 10 = 11~19     → /10 →1.1~1.9
 	pt->g_rate = 1.5;
 	pt->weapon.type = NOEQUIP;
 	pt->armor.type = NOEQUIP;
@@ -618,14 +608,6 @@ player_t* createPlayer(char name[])
 
 	return pt;
 }
-/*ポインタを返す関数
- 値を返す関数なら、戻ってきた値をmain関数の中のデータに移すため、関数内で作った戻り値がはいる領域は何回でも使える
- でもポインタを返す関数だと、返ってきたアドレスをmain関数のデータに移しても、中身は関数内で定義した領域にある。
- そのため、同じ関数を使った際、前に使ったときと同じ領域が使われると考えると、上書きされてしまい、毎回同じアドレスが返ってきてしまうので1回しか使えなかった（何人もキャラを作っても全員最新のキャラの情報になってたことからの考察。）
- でも、callocを使ったら解決したのはなんでか？
- →関数内で確保する領域が1回1回別の領域→毎回違うアドレスが返ってくる
- */
-
 
 char yesno() {
     char input = '0';
@@ -641,13 +623,13 @@ void pushenter(void)
     while ((ch = wgetch(stdscr)) != '\n' && ch != '\r' && ch != KEY_ENTER);
 }
 
-
 int reqexp(player_t* dt)
 {
 	int ret = 0;
 	ret = (dt->level * 20) + 100;
 	return ret;
 }
+
 void levelup(player_t* dt)
 {
 	(void)wgetch(stdscr);
@@ -660,6 +642,7 @@ void levelup(player_t* dt)
 	dt->protect += dt->g_rate*2;
 	dt->speed += dt->g_rate*2;
 }
+
 void printfile(char name[], player_t* pt)
 {
 	FILE* fp;
@@ -674,6 +657,7 @@ void printfile(char name[], player_t* pt)
 	}
 	fclose(fp);
 }
+
 player_t* scanfile(char name[], player_t* pt)
 {
 	FILE* fp;
@@ -730,16 +714,18 @@ int hpmax(player_t* dt)
 	hp = (HPFIR-3) + (double)dt->level * 2 * dt->g_rate;
 	return hp;
 }
+
 int mpmax(player_t* dt)
 {
 	int mp;
 	mp = MPFIR + (double)dt->level * 2 * dt->g_rate;
 	return mp;
 }
+
 void save(player_t* pt)
 {
     printw("		Do you want to save your progress?\n"); refresh();
-    printw("		1 : Yes\n2 : No\n"); refresh();
+    printw("		1 : Yes\n		2 : No\n"); refresh();
     if (yesno() == ONE)
     {
         printfile("savedata", pt);
@@ -747,7 +733,6 @@ void save(player_t* pt)
         (void)wgetch(stdscr);
     }
 }
-
 
 equip_t equipitem(player_t* dt, equip_t item)
 {
@@ -766,40 +751,18 @@ equip_t equipitem(player_t* dt, equip_t item)
 		break;
 	}
 }
+
 int attackplayer(player_t* dt)
 {
 	int ret=0;
 	ret = dt->power + dt->weapon.point;
 	return ret;
 }
+
 int defenceplayer(player_t* dt)
 {
 	int ret = 0;
 	ret = dt->protect + dt->armor.point + dt->shield.point + dt->helmet.point;
 	return ret;
-}
-
-
-
-void resizeConsoleWindow(int width, int height)
-{
-    HWND console = GetConsoleWindow();
-    RECT r;
-    GetWindowRect(console, &r); // 現在の位置を取得
-    MoveWindow(console, r.left, r.top, width, height, TRUE); // サイズ変更
-}
-
-void setConsoleBufferSize(int columns, int rows)
-{
-    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-    COORD newSize = { columns, rows };
-    SetConsoleScreenBufferSize(hOut, newSize);
-}
-
-
-// 必ず initscr() の前に呼び出す
-void maximizeConsoleWindow() {
-    HWND consoleWindow = GetConsoleWindow();
-    ShowWindow(consoleWindow, SW_MAXIMIZE);
 }
 

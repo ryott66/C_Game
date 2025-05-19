@@ -2,6 +2,14 @@
 #define STR_MAX	256
 #define MAP_MAXLEN 80
 
+#define HPFIR 35//HP at first
+#define MPFIR 30// MP at first
+#define WEAPON	1
+#define ARMOR	2
+#define SHIELD	3
+#define	HELMET	4
+#define	NOEQUIP	0
+#define SIZEMAX 20
 
 typedef struct equip {	//����
 	int type;		//�^�C�v�i�Ȃ�=NOEQUIP�j
@@ -63,9 +71,7 @@ void pushenter(void);
 equip_t equipitem(player_t* dt, equip_t item);
 int attackplayer(player_t* dt);
 int defenceplayer(player_t* dt);
-void resizeConsoleWindow(int width, int height);
-void setConsoleBufferSize(int columns, int rows);
-void maximizeConsoleWindow();
+
 
 
 

@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "assert.h": "c",
-        "flat_set": "c"
+        "flat_set": "c",
+        "pdcurses.h": "c"
     }
 }
