@@ -9,7 +9,7 @@
 #include <pdcurses.h>
 #include"gameheader.h"
 
-static const equip_t NORMAL_SWORD = {WEAPON, "Nomal Sword", 3, 3, 19};
+static const equip_t NORMAL_SWORD = {WEAPON, "普通の剣", 3, 3, 19};
 
 
 #define RAND_BATTLE 15  //偶数ダメ←乱数をこれで割った余りが0の時バトル開始で、その敵を2で割った余りでだしてる
@@ -56,13 +56,13 @@ int main(void)
 	clear();       // PDCurses の画面クリア
 	refresh();     // 表示を更新
 
-	printw("		*************************************************************************************\n");
+	printw("\t\t*************************************************************************************\n");
 	refresh();
 
-	printw("		Welcome to TAKEMON\n");
+	printw("\t\tTAKEMONへようこそ\n");
 	refresh();
 	(void)wgetch(stdscr);
-	printw("		Loading savadata\n		1 : yes\n		2 : no\n");
+	printw("\t\tセーブデータを読み込みますか？\n\t\t1 : はい\n\t\t2 : いいえ\n");
 	refresh();
 
 	player_t* pt = NULL;//パーティーへのポインタ
@@ -74,7 +74,7 @@ int main(void)
 		sndPlaySound(_T("bgm1.wav"), SND_ASYNC); //Play sound
 	}
 	else {
-		printw("		Username\n		name : ");
+		printw("\t\tユーザー名を入力してください\n\t\tなまえ : ");
 		refresh();
 		char name[16];
 		wgetnstr(stdscr, name, sizeof(name) - 1);
@@ -84,10 +84,10 @@ int main(void)
 		refresh();
 		print_player(*pt);
 		pushenter();
-		printw("		Start\n");
+		printw("\t\tゲームを開始します\n");
 		refresh();
 		pushenter();
-		printw("		Watch the prologue\n		1 : Yes\n		2 : No\n");
+		printw("\t\tプロローグを見ますか？\n\t\t1 : はい\n\t\t2 : いいえ\n");
 		refresh();
 
 		if (choose_yes()) {
@@ -99,11 +99,11 @@ int main(void)
 			sndPlaySound(_T("warfight.wav"), SND_ASYNC); //Play sound
 			Sleep(3500);
 			StopSound();
-			printw("		Hero: Ugh...\n");
+			printw("\t\t勇者 : うっ...");
 			refresh();
 
 			Sleep(3000);
-			printw("		Is this the end...?\n");
+			printw("\t\tこれで終わりなのか...？\n");
 			refresh();
 
 			Sleep(1000);
@@ -114,23 +114,23 @@ int main(void)
 			refresh();     // 表示を更新
 
 			sndPlaySound(_T("bgm1.wav"), SND_ASYNC); //Play sound
-			printw("\n		200 years ago, the hero was defeated by the Demon Lord, and the age of demons began.\n");
+			printw("\n\t\t200年前、勇者は魔王に敗れ、魔族の時代がはじまりました。\n");
 			refresh();
 			Sleep(2500);
 			(void)wgetch(stdscr);
-			printw("		Humanity, under the rule of the demons, lives in hardship.\n");
+			printw("\t\t魔族に支配された人類は苦しい生活を送っています。\n");
 			refresh();			
 			Sleep(2500);
 			(void)wgetch(stdscr);
-			printw("		You set out on a journey to become stronger.\n");
+			printw("\t\tあなたは、強くなるため旅にでました。\n");
 			refresh();
 			Sleep(2500);
 			(void)wgetch(stdscr);
-			printw("		Find allies and defeat the Demon Lord to bring peace back to the world.\n\n");
+			printw("\t\t仲間を集め、魔王をたおして世界に平和を取りもどそう\n\n");
 			refresh();
 			Sleep(2500);
 			(void)wgetch(stdscr);
-			printw("		---------------------The First Village-------------------------\n");
+			printw("\t\t---------------------最初の村-------------------------\n");
 			refresh();
 			Sleep(2500);
 			(void)wgetch(stdscr);
@@ -225,7 +225,7 @@ int main(void)
 				//NR
 			}
 			else if ( p_y== NORMAL_SWORD.y && p_x == NORMAL_SWORD.x ) {
-				printw("\n		You obtained a basic sword!\n");
+				printw("\n\t\t%sを手に入れた！\n", NORMAL_SWORD.name);
 				refresh();
 
 				pushenter();
@@ -235,26 +235,26 @@ int main(void)
 
 			}
 			else if (p_y == 12 && p_x == 10) {
-				printw("\n\n		Villager : Are you a traveler ?\n");
+				printw("\n\n\t\t村人 : 旅の人かい？\n");
 				refresh();
 				pushenter();
-				printw("		Villager : I heard the Demon Lord has powerful generals.\n");
+				printw("\t\t村人 : どうやら魔王には強力な幹部がいるらしいんだ\n");
 				refresh();
 				(void)wgetch(stdscr);
-				printw("		Villager : One of them is said to be in the cave near this town...\n");
+				printw("\t\t村人 : そのうちの１体がこの町の近くの洞窟にいるとか...\n");
 				refresh();
 				(void)wgetch(stdscr);
-				printw("		Villager : I hope peace returns soon.\n");
+				printw("\t\t村人 : はやく平和が戻るといいな\n");
 				refresh();
 				(void)wgetch(stdscr);
 				p_y = tmpy;
 				p_x = tmpx;
 			}
 			else if (p_y == 6 && p_x == 42) {
-				printw("\n\n		Villager : Oh dear...\n");
+				printw("\n\n\t\t村人 : こまったわねぇ...\n");
 				refresh();
 				pushenter();
-				printw("		Villager : There is a demon cave to the east, and we’re too scared to even leave town.\n");
+				printw("\t\t村人 : 東に魔物の洞窟があるせいで町からでるのもこわいわ。\n");
 				refresh();
 				(void)wgetch(stdscr);
 				p_y = tmpy;
@@ -275,9 +275,9 @@ int main(void)
 				else {
 					//NR
 				}
-				printw("		Continue the game\n");
+				printw("\t\tゲームを続けますか？\n");
 				refresh();
-				printw("		1 : Yes\n		2 : No\n");
+				printw("\t\t1 : つづける\n\t\t2 : やめる\n");
 				refresh();
 				if (!choose_yes()) {
 					save(pt);
@@ -296,7 +296,7 @@ int main(void)
 	}
 	clear();
 	refresh();
-	printw("		You have left the town.\n");
+	printw("\t\t町を出ました。\n");
 	refresh();
 	(void)wgetch(stdscr);	
 
@@ -388,9 +388,9 @@ int main(void)
 			else {
 				//NR
 			}
-			printw("		Continue the game\n");
+			printw("\t\tゲームを続けますか？\n");
 			refresh();
-			printw("		1 : Yes\n		2 : No\n");
+			printw("\t\t1 : つづける\n\t\t2 : やめる\n");
 			refresh();
 
 			if (!choose_yes()) {

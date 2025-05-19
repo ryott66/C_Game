@@ -10,10 +10,10 @@
 #pragma comment(lib,"Winmm.lib") //for windows sndPlay .
 #include <pdcurses.h>
 
-#define ENEMY1 "SLIME"
-#define ENEMY2 "DOG"
-#define ENEMY3 "STRANGER"
-#define ENEMY4 "GOBLIN"
+#define ENEMY1 "スライム"
+#define ENEMY2 "いぬ"
+#define ENEMY3 "かいじん"
+#define ENEMY4 "ゴブリン"
 
 
 
@@ -32,13 +32,13 @@ void printTitle()
 
     const char *title[] = {
         "*******************************************************************************************************************",
-        "                                                                                     ##########",
-        "  |   ########  ###     ##   ## ######## ##        ##   #######   ###     ##    |   ##        ##",
-        "  |      ##    ## ##    ##  ##  ##       ###      ###  ##     ##  ## ##   ##    |  ##  ######  ##",
-        "  |      ##   #######   ####    ######   ## ##  ## ## ##       ## ##  ##  ##    | ######    ######",
-        "  |      ##  ##     ##  ##  ##  ##       ##  ####  ##  ##     ##  ##   ## ##    |  ##  ######  ##",
-        "  |      ## ##       ## ##   ## ######## ##   ##   ##   #######   ##     ###    |   ##        ##",
-        "                                                                                     ##########",
+        "                                                                                     ■■■■■■■■■■",
+        "  |   ■■■■■■■■  ■■■     ■■   ■■ ■■■■■■■■ ■■        ■■   ■■■■■■■   ■■■     ■■    |   ■■        ■■",
+        "  |      ■■    ■■ ■■    ■■  ■■  ■■       ■■■      ■■■  ■■     ■■  ■■ ■■   ■■    |  ■■  ■■■■■■  ■■",
+        "  |      ■■   ■■■■■■■   ■■■■    ■■■■■■   ■■ ■■  ■■ ■■ ■■       ■■ ■■  ■■  ■■    | ■■■■■■    ■■■■■■",
+        "  |      ■■  ■■     ■■  ■■  ■■  ■■       ■■  ■■■■  ■■  ■■     ■■  ■■   ■■ ■■    |  ■■  ■■■■■■  ■■",
+        "  |      ■■ ■■       ■■ ■■   ■■ ■■■■■■■■ ■■   ■■   ■■   ■■■■■■■   ■■     ■■■    |   ■■        ■■",
+        "                                                                                     ■■■■■■■■■■",
         "*******************************************************************************************************************"
     };
 
@@ -46,7 +46,7 @@ void printTitle()
         move(margin_top + i, margin_left);  //カーソルを移動
         printw("%s", title[i]);
     }
-	printw("\n");
+    printw("\n");
 
     refresh();
 }
@@ -54,29 +54,29 @@ void printTitle()
 void printslime()
 {
     printw(
-        "		***********************************************************************\n"
-        "		A wild %s appeared!!\n\n", ENEMY1);
+        "        ***********************************************************************\n"
+        "        やせいの %s があらわれた！\n\n", ENEMY1);
     refresh();
     attron(COLOR_PAIR(1));
     printw(
-        	"                               ##                      \n"
-        	"                              #  #                     \n"
-        	"                             #    #                    \n"
-        	"                             #    #                    \n"
-        	"                            #      #                   \n"
-        	"                          #          #                 \n");
-    printw( "                      ##              ##               \n"
-        	"                  ##                      ##           \n"
-        	"                 #                           #         \n"
-        	"                #       ###       ###         #        \n"
-        	"                #                              #       \n"
-        	"                 #    ##              ##      #        \n");
-    printw( "                   #     #############      #          \n"
-        	"                     ##                 ###            \n"
-        	"                        ###############                \n ");
+        	"                                ■■                      \n"
+        	"                               ■  ■                     \n"
+        	"                              ■    ■                    \n"
+        	"                              ■    ■                    \n"
+        	"                             ■      ■                   \n"
+        	"                           ■          ■                 \n");
+    printw( "                          ■■              ■■               \n"
+        	"                       ■■                   ■■            \n"
+        	"                     ■                         ■         \n"
+        	"                    ■      ■■■       ■■■        ■        \n"
+        	"                   ■                             ■       \n"
+        	"                    ■    ■■■           ■■■      ■        \n");
+    printw( "                      ■     ■■■■■■■■■■■        ■          \n"
+        	"                       ■■                   ■■■            \n"
+        	"                          ■■■■■■■■■■■■■■■             \n ");
     attroff(COLOR_PAIR(1));
     refresh();
-    printw("		************************************************************************\n\n");
+    printw("        ************************************************************************\n\n");
     refresh();
 
 }
@@ -84,25 +84,25 @@ void printslime()
 void printdog()
 {
     printw(
-        	"		***********************************************************************\n"
-        	"		A wild %s appeared!!\n\n",ENEMY2);
-	refresh();
+        "        ***********************************************************************\n"
+        "        やせいの %s があらわれた！\n\n",ENEMY2);
+    refresh();
     attron(COLOR_PAIR(2));
-    printw( "          ###           ###                  \n"
-        	"          #  #          #  ##                \n"
-        	"         #    #       ##    ##               \n");
-    printw( "        #  #  ########   ##   #              \n"
-        	"        #                      ##            \n"
-        	"        #                     ##             \n"
-        	"        #      #       #      ##             \n"
-        	"        ##         #         ##              \n"
-        	"         ##       ####       ##              \n");
-    printw( "         #    ####   ####     ##             \n"
-        	"         ##                  ##             \n"
-        	"           #################                 \n"
+    printw( "          ■■■           ■■■                  \n"
+        	"          ■  ■          ■  ■■                \n"
+        	"         ■    ■       ■■    ■■               \n");
+    printw( "        ■  ■  ■■■■■■■■   ■■   ■              \n"
+        	"        ■                      ■■            \n"
+        	"        ■                     ■■             \n"
+        	"        ■      ■       ■      ■■             \n"
+        	"        ■■         ■         ■■              \n"
+        	"         ■■       ■■■■       ■■              \n");
+    printw( "         ■    ■■■■   ■■■■     ■■             \n"
+        	"         ■■                  ■■              \n"
+        	"           ■■■■■■■■■■■■■■■■                  \n"
         	"                                             \n");
     attroff(COLOR_PAIR(2));
-    printw( "		***********************************************************************\n\n");
+    printw( "        ***********************************************************************\n\n");
     refresh();
 
 }
@@ -110,65 +110,65 @@ void printdog()
 void printboy()
 {
     printw(
-        	"		***********************************************************************\n"
-        	"		A wild %s appeared!!\n\n"
+        	"        ***********************************************************************\n"
+        	"        やせいの %s があらわれた！\n\n"
         	"                                                         \n"
-        	"               #########                                       \n"
-        	"            ##          ###                                          \n"
-            "           #                #                       \n",ENEMY3);
-    printw( "          #                  #                                   \n"
-        	"         # ####################                           \n"
-        	"        # #                  ###         \n"
-        	"        ##    ###      ###     ##                           \n"
-        	"         #         ##         ##                            \n"
-        	"          #                   #                             \n");
-    printw ("           #    #       #    #                          \n"
-        	"            #    #######    #                      \n"
-        	"             ##          ##                             \n"
-        	"                #########                                     \n"
+        	"               ■■■■■■■■■                                       \n"
+        	"            ■■          ■■■                              \n"
+        	"           ■                ■                       \n",ENEMY3);
+    printw( "          ■                  ■                                   \n"
+        	"         ■ ■■■■■■■■■■■■■■■■  ■■                        \n"
+        	"        ■ ■                  ■■■                      \n"
+        	"        ■■    ■■■      ■■■     ■■                           \n"
+        	"         ■         ■■         ■■                            \n"
+        	"          ■                   ■                             \n");
+    printw ("           ■    ■       ■    ■                          \n"
+        	"            ■    ■■■■■■■    ■                      \n"
+        	"             ■■          ■■                             \n"
+        	"                ■■■■■■■■■                                     \n"
         	"                                                          \n"
-        	"		***********************************************************************\n\n");
+        	"        ***********************************************************************\n\n");
     refresh();
 
 }
 
 void printgoblin()
 {
-    printw( "		***********************************************************************\n"
-        	"		A wild %s appeared!!\n\n",ENEMY4);
+    printw( "        ***********************************************************************\n"
+        "        やせいの %s があらわれた！\n\n",ENEMY4);
     refresh();
     attron(COLOR_PAIR(3));
     printw(
-        	"                      ##                           \n"
-        	"                  ##########                       \n"
-        	"                ##          ##                     \n"
-        	"          #    ##             ##     #             \n"
-        	"         # #  ##               ##  #  #            \n"
-        	"        #  ##                  ###   ##            \n");
-    printw( "         #  ##                   #  ##             \n"
-        	"          ## #  ###       ###    # ##              \n"
-        	"           # #  # ##     # ##    # #               \n"
-        	"     #     # #   ##      ##      ##                \n"
-        	"    # #     ##                  ##                 \n"
-        	"    # #        #   #    #    ###                   \n");
-    printw( "    # #        ##   #####  ##  ##                  \n"
-        	"    # #     ##   ##     # ##   ###                 \n"
-        	"     # #   ##       #####     ##  #                \n"
-        	"     # #  #   #               ##  ##               \n"
-        	"     ####  ##  #             ##  ##                \n"
-        	"      ###   #  #       #####  ##                   \n");
-    printw( "        ## #  #       ##        ###                \n"
-        	"          ###  #         #######                   \n"
-        	"               #   #####         ##                \n"
-        	"             #   ##      ####      #               \n"
-        	"            #   ##           ##     #              \n"
-        	"             #   ##            ##    #             \n");
-    printw( "               #   ##            ##  #             \n"
-        	"                ####               ###             \n"
+        	"                      ■■                           \n"
+        	"                  ■■■■■■■■■■                       \n"
+        	"                ■■          ■■                     \n"
+        	"          ■    ■■             ■■     ■             \n"
+        	"         ■ ■  ■■               ■■  ■  ■            \n"
+        	"        ■  ■■                  ■■■   ■■            \n");
+    printw( "         ■  ■■                   ■  ■■             \n"
+        	"          ■■ ■  ■■■       ■■■    ■ ■■              \n"
+        	"           ■ ■  ■ ■■     ■ ■■    ■ ■               \n"
+        	"     ■     ■ ■   ■■      ■■      ■■                \n"
+        	"    ■ ■     ■■                  ■■                 \n"
+        	"    ■ ■        ■   ■    ■    ■■■                   \n");
+    printw( "    ■ ■        ■■   ■■■■■  ■■  ■■                  \n"
+        	"    ■ ■     ■■   ■■     ■ ■■   ■■■                 \n"
+        	"     ■ ■   ■■       ■■■■■     ■■  ■                \n"
+        	"     ■ ■  ■   ■               ■■  ■■               \n"
+        	"     ■■■■  ■■  ■             ■■  ■■                \n"
+        	"      ■■■   ■  ■       ■■■■■  ■■■■■■               \n");
+    printw( "        ■■ ■  ■       ■■        ■■■                \n"
+        	"          ■■■  ■         ■■■■■■■                   \n"
+        	"               ■   ■■■■■         ■■                \n"
+        	"             ■   ■■      ■■■■      ■               \n"
+        	"            ■   ■■           ■■     ■              \n"
+        	"             ■   ■■            ■■    ■             \n");
+    printw( "               ■   ■■            ■■  ■             \n"
+        	"                ■■■■               ■■■             \n"
         	"                                                   \n");
     attroff(COLOR_PAIR(3));
     refresh();
-    printw("		***********************************************************************\n\n");
+    printw("        ***********************************************************************\n\n");
     refresh();
 }
 
@@ -225,16 +225,16 @@ void runBattle(player_t* dt,int maptype)
 			dt->protect *= 1 / 2;
 			cti2--;//ぼうぎょが使えるようになる
 		}
-		printw("		%s (HP: %d)(MP: %d) vs %s (HP: %d)\n",dt->name, dt->hp,dt->mp, ene.name, ene.hp);
+		printw("\t\t%s (HP: %d)(MP: %d) vs %s (HP: %d)\n",dt->name, dt->hp,dt->mp, ene.name, ene.hp);
 		refresh();
 		(void)wgetch(stdscr);
 		ch1 = '0';
-		printw("		1.Attack\n		2.Guard\n		3.Magic (MP Cost: %d)\n		4.Run Away\n\n\n",MP_MAGIC);
+		printw("\t\t1.こうげき\n\t\t2.ぼうぎょ\n\t\t3.まほう (消費MP: %d)\n\t\t4.にげる\n\n\n",MP_MAGIC);
 		refresh();
 		for (; ch1 !=ONE&& ch1 != TWO && ch1 != THREE && ch1 != FOUR; ch1 = wgetch(stdscr)) {}
 		if (dt->mp < MP_MAGIC && ch1 == THREE) {
 			ch1 = 0;
-			printw("		Not enough MP!\n");
+			printw("\t\tMPがたりません\n");
 			refresh();
 			(void)wgetch(stdscr);
 		}
@@ -243,50 +243,50 @@ void runBattle(player_t* dt,int maptype)
 		}
 		switch (ch1) {
 		case ONE:
-			printw("		You attacked the %s!\n\n", ene.name);
+			printw("\t\t%sをこうげきした！\n\n", ene.name);
 			refresh();
 			sndPlaySound(_T("attack.wav"), SND_ASYNC);
-			(void)wgetch(stdscr);
+			Sleep(1500);
 			sndPlaySound(_T("battle cut.wav"), SND_ASYNC);
 			dme = calcDamage(attackplayer(dt),ene.defence);
-			printw("		%s (HP: %d) takes %d damage!\n", ene.name, ene.hp, dme);
+			printw("\t\t%s (HP: %d) に %d のダメージ！\n", ene.name, ene.hp, dme);
 			refresh();
 			ene.hp -= dme;
 			(void)wgetch(stdscr);
 			break;
 		case TWO:
-			printw("		You brace yourself for the attack.\n");
+			printw("\t\tぼうぎょをかためた！\n");
 			sndPlaySound(_T("buf.wav"), SND_ASYNC);
-			(void)wgetch(stdscr);
+			Sleep(1500);
 			sndPlaySound(_T("battle cut.wav"), SND_ASYNC);
 
 			refresh();
 			if (cti2 == 0) {
-				printw("		Your defense is doubled!\n");
+				printw("\t\tぼうぎょ力が2倍になった！\n");
 				refresh();
 				dt->protect *= 2;
 				finbougyo = turn + 3;
 				cti2++;
 			} else {
-				printw("		But you can't use it again — nothing happened.\n");
+				printw("\t\tしかしなにも起こらなかった。\n");
 				refresh();
 			}
 			break;
 		case THREE:
 			dt->mp -= MP_MAGIC;
-			printw("		You cast an attack spell!\n");
+			printw("\t\tこうげきまほうをとなえた！\n");
 			refresh();
 			sndPlaySound(_T("explosion.wav"), SND_ASYNC);
-			(void)wgetch(stdscr);
+			Sleep(1500);
 			sndPlaySound(_T("battle cut.wav"), SND_ASYNC);
 			dme = (double)calcDamage(attackplayer(dt), ene.defence) * EFFECT_MAGIC;
-			printw("		%s (HP: %d) takes %d damage!\n", ene.name, ene.hp, dme);
+			printw("\t\t%s (HP: %d) に %d のダメージ！\n", ene.name, ene.hp, dme);
 			refresh();
 			ene.hp -= dme;
 			(void)wgetch(stdscr);
 			break;
 		case FOUR:
-			printw("		You turned your back and ran from the %s...\n", ene.name);
+			printw("\t\t%sからにげだした…\n", ene.name);
 			refresh();
 			sndPlaySound(_T("game over.wav"), SND_ASYNC);
 			(void)wgetch(stdscr);
@@ -298,33 +298,33 @@ void runBattle(player_t* dt,int maptype)
 			// if (ene.name == ENEMY4) {
 			if (strcmp(ene.name, ENEMY4) == 0){
 				if (rand_n(2) == 1) {// enemy does normal attack for 1/2 
-					printw("		%s attacks!\n", ene.name);
+					printw("\t\t%sのこうげき！\n", ene.name);
 					refresh();
 					sndPlaySound(_T("goblin.wav"), SND_ASYNC); //Play sound
 					Sleep(1000);
 					sndPlaySound(_T("attack.wav"), SND_ASYNC);
-					Sleep(1000);
+					Sleep(1500);;
 					sndPlaySound(_T("battle cut2.wav"), SND_ASYNC);
 					dmi = calcDamage(ene.attack,defenceplayer(dt));
-					printw("		You take %d damage!\n", dmi);
+					printw("\t\t%d のダメージをうけた！\n", dmi);
 					refresh();
 					dt->hp -= dmi;
 				}
 				else {  //enemy does special attack for 1/2
 					switch (rand_n(4)) {
 					case 1:
-						printw("		%s used Swap!\n", ene.name);
+						printw("\t\t%sはスワップをつかった！\n", ene.name);
 						refresh();
 						sndPlaySound(_T("gobmagic.wav"), SND_ASYNC);
 						Sleep(3000);
 						sndPlaySound(_T("battle cut2.wav"), SND_ASYNC);
-						(void)wgetch(stdscr);
+						Sleep(1500);
 						swap(&dt->hp, &dt->mp);
-						printw("		Your HP and MP have switched places!\n		HP(%d) MP(%d)\n", dt->hp, dt->mp);
+						printw("\t\tHPとMPが入れかわった！\n\t\tHP(%d) MP(%d)\n", dt->hp, dt->mp);
 						refresh();
 						break;
 					case 2:
-						printw("		%s used Double!\n", ene.name);
+						printw("\t\t%sはダブルをつかった！\n", ene.name);
 						refresh();
 						int rn_db = 0; //random double success
 						rn_db = rand_n(2) - 1;   //  (1 or 2)-1  →　(0 or 1)
@@ -333,57 +333,57 @@ void runBattle(player_t* dt,int maptype)
 								sndPlaySound(_T("gobmagic.wav"), SND_ASYNC);
 								Sleep(3000);
 								sndPlaySound(_T("battle cut.wav"), SND_ASYNC);
-								(void)wgetch(stdscr);
-								printw("		%s's attack and defense have doubled!\n", ene.name);
+								Sleep(1500);
+								printw("\t\t%sのこうげき力とぼうぎょ力が2倍になった！\n", ene.name);
 								refresh();
 								cte2++;//enemy uses double, ct2 become 1
 							}
 							else {
-								printw("		But it failed!\n");
+								printw("\t\tしかし失敗した！\n");
 								refresh();
 							}
 						}
 						else {
-							printw("		But he can't use it again — nothing happened.\n");
+							printw("\t\tしかしなにも起こらなかった。\n");
 							refresh();
 						}
 
 						break;
 					case 3:
-						printw("		%s used Power Up!\n", ene.name);
+						printw("\t\t%sはパワーアップをつかった！\n", ene.name);
 						refresh();
 						if (cte3 == 0) {
 							sndPlaySound(_T("gobmagic.wav"), SND_ASYNC);
 							Sleep(3000);
 							sndPlaySound(_T("battle cut2.wav"), SND_ASYNC);
-							(void)wgetch(stdscr);
+							Sleep(1500);
 							type = DEF_UP;
 							changeParam(&ene.attack, type);
-							printw("		%s's attack power increased by 60%!\n", ene.name);
+							printw("\t\t%sのこうげき力が60%%上がった！\n", ene.name);
 							refresh();
 							cte3++;
 						}
 						else {
-							printw("		But he can't use it again — nothing happened.\n");
+							printw("\t\tしかしなにも起こらなかった。\n");
 							refresh();
 						}
 						break;
 					case 4:
-						printw("		%s used Defense Down!\n", ene.name);
+						printw("\t\t%sはダウンを使った！\n", ene.name);
 						refresh();
 						if (cte4 == 0) {
 							sndPlaySound(_T("gobmagic.wav"), SND_ASYNC);
 							Sleep(3000);
 							sndPlaySound(_T("battle cut.wav"), SND_ASYNC);
-							(void)wgetch(stdscr);
+							Sleep(1500);
 							type = DEF_DOWN;
 							changeParam(&dt->protect, type);
-							printw("		Your defense decreased by 60%!\n");
+							printw("\t\tぼうぎょ力が60%%下がった！\n");
 							refresh();
 							cte4++;
 						}
 						else {
-							printw("		But he can't use it again — nothing happened.\n");
+							printw("\t\tしかしなにも起こらなかった。\n");
 							refresh();
 						}
 						break;
@@ -392,23 +392,23 @@ void runBattle(player_t* dt,int maptype)
 				}
 			}
 			else {
-				printw("		%s attacks!\n", ene.name);
+				printw("\t\t%sのこうげき！\n", ene.name);
 				refresh();
 				sndPlaySound(_T("attack.wav"), SND_ASYNC);
-				(void)wgetch(stdscr);
+				Sleep(1500);
 				sndPlaySound(_T("battle cut2.wav"), SND_ASYNC);
 				dmi = calcDamage(ene.attack, defenceplayer(dt));
-				printw("		You take %d damage!\n", dmi);
+				printw("\t\t%d のダメージをうけた！\n", dmi);
 				refresh();
 				dt->hp -= dmi;
 			}
 			(void)wgetch(stdscr);
 			if (dt->hp <= 0) {  //if player is killed, program should finish.
-				printw("		You were defeated by the %s…\n", ene.name);
+				printw("\t\t%sにやられてしまった…\n", ene.name);
 				refresh();
 				sndPlaySound(_T("game over.wav"), SND_ASYNC);
 				(void)wgetch(stdscr);
-				printw("		It seems you are not the hero this world needed...\n");
+				printw("\t\tこの世界の勇者ではなかったようだ…\n");
 				refresh();
 				(void)wgetch(stdscr);
 				return;
@@ -419,7 +419,7 @@ void runBattle(player_t* dt,int maptype)
 		}
 		else {}
 	}
-	printw("		You defeated the enemy!\n");//if enemy is dead, player don't have to repeat choice because of "for sentence".
+	printw("\t\t敵をたおした！\n");//if enemy is dead, player don't have to repeat choice because of "for sentence".
 	sndPlaySound(_T("win.wav"), SND_ASYNC);
 	if (cte4 == 1) {
 		dt->protect *= 2;
@@ -428,7 +428,7 @@ void runBattle(player_t* dt,int maptype)
 		//NR
 	}
 	dt->exp += ene.exp;
-	printw("		Gained %d EXP!\n", ene.exp);		
+	printw("\t\t%d の経験値を手に入れた！\n", ene.exp);
 	refresh();
 	(void)wgetch(stdscr);
 
@@ -521,39 +521,39 @@ void changeParam(int* dt, int type)
 
 void print_player(player_t dt1)
 {
-    printw("		id:%d\n", dt1.id); refresh();
-    printw("		Name:%s\n", dt1.name); refresh();
-    printw("		Level:%d\n", dt1.level); refresh();
-    printw("		HP:%d\n", dt1.hp); refresh();
-    printw("		MP:%d\n", dt1.mp); refresh();
-    printw("		Power:%d\n", dt1.power); refresh();
-    printw("		Defense:%d\n", dt1.protect); refresh();
-    printw("		Speed:%d\n", dt1.speed); refresh();
-    printw("		Exp:%d\n", dt1.exp); refresh();
-    printw("		Growth-Rate:%lf\n", dt1.g_rate); refresh();
+    printw("		id：%d\n", dt1.id); refresh();
+    printw("		なまえ：%s\n", dt1.name); refresh();
+    printw("		レベル：%d\n", dt1.level); refresh();
+    printw("		HP：%d\n", dt1.hp); refresh();
+    printw("		MP：%d\n", dt1.mp); refresh();
+    printw("		こうげき力：%d\n", dt1.power); refresh();
+    printw("		ぼうぎょ力：%d\n", dt1.protect); refresh();
+    printw("		スピード：%d\n", dt1.speed); refresh();
+    printw("		経験値：%d\n", dt1.exp); refresh();
+    printw("		成長率：%lf\n", dt1.g_rate); refresh();
     if (dt1.weapon.type == NOEQUIP) {
-        printw("		Weapon:None\n"); refresh();
+        printw("		武器：なし\n"); refresh();
     } else {
-        printw("		Weapon:%s\n", dt1.weapon.name); refresh();
-        printw("		Point:%d\n", dt1.weapon.point); refresh();
+        printw("		武器：%s\n", dt1.weapon.name); refresh();
+        printw("		つよさ：%d\n", dt1.weapon.point); refresh();
     }
     if (dt1.armor.type == NOEQUIP) {
-        printw("		Armor:None\n"); refresh();
+        printw("		服：なし\n"); refresh();
     } else {
-        printw("		Armor:%s\n", dt1.armor.name); refresh();
-        printw("		Point:%d\n", dt1.armor.point); refresh();
+        printw("		服：%s\n", dt1.armor.name); refresh();
+        printw("		つよさ:%d\n", dt1.armor.point); refresh();
     }
     if (dt1.shield.type == NOEQUIP) {
-        printw("		Shield:None\n"); refresh();
+        printw("		盾：なし\n"); refresh();
     } else {
-        printw("		Shield:%s\n", dt1.shield.name); refresh();
-        printw("		Point:%d\n", dt1.shield.point); refresh();
+        printw("		盾：%s\n", dt1.shield.name); refresh();
+        printw("		つよさ：%d\n", dt1.shield.point); refresh();
     }
     if (dt1.helmet.type == NOEQUIP) {
-        printw("		Helmet:None\n"); refresh();
+        printw("		ヘルメット：なし\n"); refresh();
     } else {
-        printw("		Helmet:%s\n", dt1.helmet.name); refresh();
-        printw("		Point:%d\n", dt1.helmet.point); refresh();
+        printw("		ヘルメット：%s\n", dt1.helmet.name); refresh();
+        printw("		つよさ：%d\n", dt1.helmet.point); refresh();
     }
     printw("\n\n"); refresh();
 }
@@ -594,7 +594,7 @@ player_t* createPlayer(char name[], int id)
 	pt->armor.type = NOEQUIP;
 	pt->shield.type = NOEQUIP;
 	pt->helmet.type = NOEQUIP;
-	char noeq[64] = "None";
+	char noeq[64] = "なし";
 	sprintf(pt->weapon.name, "%s", noeq);
 	sprintf(pt->armor.name, "%s", noeq);
 	sprintf(pt->shield.name, "%s", noeq);
@@ -636,7 +636,7 @@ int reqexp(player_t* dt)
 void levelup(player_t* dt)
 {
 	(void)wgetch(stdscr);
-	printw("		%s leveled up!\n", dt->name);
+	printw("\t\t%s のレベルがあがった！\n", dt->name);
 	dt->exp -= reqexp(dt);//levelより先
 	dt->level++;       //expの後
 	dt->hp = hpmax(dt);
@@ -705,7 +705,7 @@ player_t* scanfile(char name[], player_t* pt)
 		fclose(fp);
 	}
 	else {
-		printw("Save data not found.\n");
+		printw("セーブデータが見つかりません\n");
 	}
 
 	return pt;
@@ -727,12 +727,12 @@ int mpmax(player_t* dt)
 
 void save(player_t* pt)
 {
-    printw("		Do you want to save your progress?\n"); refresh();
-    printw("		1 : Yes\n		2 : No\n"); refresh();
+    printw("		セーブしますか?\n"); refresh();
+    printw("		1 : はい\n		2 : いいえ\n"); refresh();
     if (choose_yes())
     {
         printfile("savedata", pt);
-        printw("		Game saved successfully!\n"); refresh();
+        printw("		セーブしました!\n"); refresh();
         (void)wgetch(stdscr);
     }
 }
