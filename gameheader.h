@@ -59,6 +59,7 @@ typedef struct enemy {
 }enemy_t;
 
 void printTitle();
+void prologue();
 void printslime();
 void printdog();
 void printboy();

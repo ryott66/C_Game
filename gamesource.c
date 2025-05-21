@@ -62,84 +62,64 @@ int main(void)
 	printw("\t\tTAKEMONへようこそ\n");
 	refresh();
 	(void)wgetch(stdscr);
-	printw("\t\tセーブデータを読み込みますか？\n\t\t1 : はい\n\t\t2 : いいえ\n");
-	refresh();
+
 
 	player_t* pt = NULL;//パーティーへのポインタ
 	player_t* you = NULL;
 
-	if (choose_yes()) {
-		pt = scanfile("savedata", pt);
-		you = pt;
-		sndPlaySound(_T("bgm1.wav"), SND_ASYNC); //Play sound
+	printw("\t\tゲームを開始します\n");
+	printw("\t\t0 : 最初から\n");
+	refresh();
+	for (int i = 1; i <= 3; ++i) {  //savedata1 to savedata3
+    	char filename[30];
+    	snprintf(filename, sizeof(filename), "save%d.txt", i);
+    	FILE* fp = fopen(filename, "r");
+    	if (fp) {
+    	    fclose(fp);
+    	    printw("\t\t%d : セーブポイント%d\n", i, i);
+			refresh();
+    	}else{
+			// NR
+		}
 	}
-	else {
-		printw("\t\tユーザー名を入力してください\n\t\tなまえ : ");
-		refresh();
-		char name[16];
-		wgetnstr(stdscr, name, sizeof(name) - 1);
-		you = createPlayer(name,0); //player id=0
-		pt = you;
+
+	int choice = 0;
+	while (choice < '0' || choice > '3') {
+	    choice = wgetch(stdscr);
+	}
+
+	if (choice == '0') {  // 最初から
+	    printw("\t\tユーザー名を入力してください\n\t\tなまえ : ");
+	    char name[16];
+	    wgetnstr(stdscr, name, sizeof(name) - 1);
+	    you = createPlayer(name, 0); // ユーザのIDは0
+	    pt = you;
 		printw("\n\n");
 		refresh();
 		print_player(*pt);
 		pushenter();
 		printw("\t\tゲームを開始します\n");
 		refresh();
-		pushenter();
 		printw("\t\tプロローグを見ますか？\n\t\t1 : はい\n\t\t2 : いいえ\n");
 		refresh();
-
-		if (choose_yes()) {
-			clear();
-			refresh();
-
-			sndPlaySound(_T("war.wav"), SND_ASYNC); //Play sound
-			Sleep(5000);
-			sndPlaySound(_T("warfight.wav"), SND_ASYNC); //Play sound
-			Sleep(3500);
-			StopSound();
-			printw("\t\t勇者 : うっ...");
-			refresh();
-
-			Sleep(3000);
-			printw("\t\tこれで終わりなのか...？\n");
-			refresh();
-
-			Sleep(1000);
-			sndPlaySound(_T("todome.wav"), SND_ASYNC); //Play sound
-			Sleep(3500);
-			(void)wgetch(stdscr);
-			clear();       // PDCurses の画面クリア
-			refresh();     // 表示を更新
-
-			sndPlaySound(_T("bgm1.wav"), SND_ASYNC); //Play sound
-			printw("\n\t\t200年前、勇者は魔王に敗れ、魔族の時代がはじまりました。\n");
-			refresh();
-			Sleep(2500);
-			(void)wgetch(stdscr);
-			printw("\t\t魔族に支配された人類は苦しい生活を送っています。\n");
-			refresh();			
-			Sleep(2500);
-			(void)wgetch(stdscr);
-			printw("\t\tあなたは、強くなるため旅にでました。\n");
-			refresh();
-			Sleep(2500);
-			(void)wgetch(stdscr);
-			printw("\t\t仲間を集め、魔王をたおして世界に平和を取りもどそう\n\n");
-			refresh();
-			Sleep(2500);
-			(void)wgetch(stdscr);
-			printw("\t\t---------------------最初の村-------------------------\n");
-			refresh();
-			Sleep(2500);
-			(void)wgetch(stdscr);
+		if(choose_yes()){
+			prologue();
+		}else{
+			//NR
 		}
-		else {
-			sndPlaySound(_T("bgm1.wav"), SND_ASYNC); //Play sound
-
-		}
+	} else {
+	    int slot = choice - '0'; // ASCII⇒int
+	    char filename[30];
+	    snprintf(filename, sizeof(filename), "save%d.txt", slot);
+	    pt = scanfile(filename, pt);
+	    you = pt;
+		printw("%d\n\n",slot);
+		refresh();
+		print_player(*you);
+		pushenter();
 	}
+
+	sndPlaySound(_T("bgm1.wav"), SND_ASYNC); //Play sound
 
 
 
@@ -395,6 +375,8 @@ int main(void)
 
 			if (!choose_yes()) {
 				save(pt);
+				endwin();
+				return 0;
 			}
 			else {
 				//NR

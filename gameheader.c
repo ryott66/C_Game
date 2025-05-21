@@ -51,6 +51,50 @@ void printTitle()
     refresh();
 }
 
+void prologue(){
+	clear();
+	refresh();
+	sndPlaySound(_T("war.wav"), SND_ASYNC); //Play sound
+	Sleep(5000);
+	sndPlaySound(_T("warfight.wav"), SND_ASYNC); //Play sound
+	Sleep(3500);
+	StopSound();
+	printw("\t\t勇者 : うっ...");
+	refresh();
+	Sleep(2400);
+	printw("\t\tこれで終わりなのか...？\n");
+	refresh();
+
+	Sleep(1000);
+	sndPlaySound(_T("todome.wav"), SND_ASYNC); //Play sound
+	Sleep(3500);
+	(void)wgetch(stdscr);
+	clear();       // PDCurses の画面クリア
+	refresh();     // 表示を更新
+
+	sndPlaySound(_T("bgm1.wav"), SND_ASYNC); //Play sound
+	printw("\n\t\t200年前、勇者は魔王に敗れ、魔族の時代がはじまりました。\n");
+	refresh();
+	Sleep(2500);
+	(void)wgetch(stdscr);
+	printw("\t\t魔族に支配された人類は苦しい生活を送っています。\n");
+	refresh();			
+	Sleep(2500);
+	(void)wgetch(stdscr);
+	printw("\t\tあなたは、強くなるため旅にでました。\n");
+	refresh();
+	Sleep(2500);
+	(void)wgetch(stdscr);
+	printw("\t\t仲間を集め、魔王をたおして世界に平和を取りもどそう\n\n");
+	refresh();
+	Sleep(2500);
+	(void)wgetch(stdscr);
+	printw("\t\t---------------------最初の村-------------------------\n");
+	refresh();
+	Sleep(2500);
+	(void)wgetch(stdscr);
+}
+
 void printslime()
 {
     printw(
@@ -228,10 +272,12 @@ void runBattle(player_t* dt,int maptype)
 		printw("\t\t%s (HP: %d)(MP: %d) vs %s (HP: %d)\n",dt->name, dt->hp,dt->mp, ene.name, ene.hp);
 		refresh();
 		(void)wgetch(stdscr);
-		ch1 = '0';
 		printw("\t\t1.こうげき\n\t\t2.ぼうぎょ\n\t\t3.まほう (消費MP: %d)\n\t\t4.にげる\n\n\n",MP_MAGIC);
 		refresh();
-		for (; ch1 !=ONE&& ch1 != TWO && ch1 != THREE && ch1 != FOUR; ch1 = wgetch(stdscr)) {}
+		ch1 = '0';
+		while (ch1 < '1' || ch1 > '3') {  //wgetchはASCIIをintで返す⇒"1"は49, "3"は51
+    		ch1 = wgetch(stdscr);
+		}
 		if (dt->mp < MP_MAGIC && ch1 == THREE) {
 			ch1 = 0;
 			printw("\t\tMPがたりません\n");
@@ -246,7 +292,7 @@ void runBattle(player_t* dt,int maptype)
 			printw("\t\t%sをこうげきした！\n\n", ene.name);
 			refresh();
 			sndPlaySound(_T("attack.wav"), SND_ASYNC);
-			Sleep(1500);
+			Sleep(1200);
 			sndPlaySound(_T("battle cut.wav"), SND_ASYNC);
 			dme = calcDamage(attackplayer(dt),ene.defence);
 			printw("\t\t%s (HP: %d) に %d のダメージ！\n", ene.name, ene.hp, dme);
@@ -257,7 +303,7 @@ void runBattle(player_t* dt,int maptype)
 		case TWO:
 			printw("\t\tぼうぎょをかためた！\n");
 			sndPlaySound(_T("buf.wav"), SND_ASYNC);
-			Sleep(1500);
+			Sleep(1200);
 			sndPlaySound(_T("battle cut.wav"), SND_ASYNC);
 
 			refresh();
@@ -277,7 +323,7 @@ void runBattle(player_t* dt,int maptype)
 			printw("\t\tこうげきまほうをとなえた！\n");
 			refresh();
 			sndPlaySound(_T("explosion.wav"), SND_ASYNC);
-			Sleep(1500);
+			Sleep(1200);
 			sndPlaySound(_T("battle cut.wav"), SND_ASYNC);
 			dme = (double)calcDamage(attackplayer(dt), ene.defence) * EFFECT_MAGIC;
 			printw("\t\t%s (HP: %d) に %d のダメージ！\n", ene.name, ene.hp, dme);
@@ -303,7 +349,7 @@ void runBattle(player_t* dt,int maptype)
 					sndPlaySound(_T("goblin.wav"), SND_ASYNC); //Play sound
 					Sleep(1000);
 					sndPlaySound(_T("attack.wav"), SND_ASYNC);
-					Sleep(1500);;
+					Sleep(1200);;
 					sndPlaySound(_T("battle cut2.wav"), SND_ASYNC);
 					dmi = calcDamage(ene.attack,defenceplayer(dt));
 					printw("\t\t%d のダメージをうけた！\n", dmi);
@@ -318,7 +364,7 @@ void runBattle(player_t* dt,int maptype)
 						sndPlaySound(_T("gobmagic.wav"), SND_ASYNC);
 						Sleep(3000);
 						sndPlaySound(_T("battle cut2.wav"), SND_ASYNC);
-						Sleep(1500);
+						Sleep(1200);
 						swap(&dt->hp, &dt->mp);
 						printw("\t\tHPとMPが入れかわった！\n\t\tHP(%d) MP(%d)\n", dt->hp, dt->mp);
 						refresh();
@@ -333,7 +379,7 @@ void runBattle(player_t* dt,int maptype)
 								sndPlaySound(_T("gobmagic.wav"), SND_ASYNC);
 								Sleep(3000);
 								sndPlaySound(_T("battle cut.wav"), SND_ASYNC);
-								Sleep(1500);
+								Sleep(1200);
 								printw("\t\t%sのこうげき力とぼうぎょ力が2倍になった！\n", ene.name);
 								refresh();
 								cte2++;//enemy uses double, ct2 become 1
@@ -356,7 +402,7 @@ void runBattle(player_t* dt,int maptype)
 							sndPlaySound(_T("gobmagic.wav"), SND_ASYNC);
 							Sleep(3000);
 							sndPlaySound(_T("battle cut2.wav"), SND_ASYNC);
-							Sleep(1500);
+							Sleep(1200);
 							type = DEF_UP;
 							changeParam(&ene.attack, type);
 							printw("\t\t%sのこうげき力が60%%上がった！\n", ene.name);
@@ -375,7 +421,7 @@ void runBattle(player_t* dt,int maptype)
 							sndPlaySound(_T("gobmagic.wav"), SND_ASYNC);
 							Sleep(3000);
 							sndPlaySound(_T("battle cut.wav"), SND_ASYNC);
-							Sleep(1500);
+							Sleep(1200);
 							type = DEF_DOWN;
 							changeParam(&dt->protect, type);
 							printw("\t\tぼうぎょ力が60%%下がった！\n");
@@ -395,7 +441,7 @@ void runBattle(player_t* dt,int maptype)
 				printw("\t\t%sのこうげき！\n", ene.name);
 				refresh();
 				sndPlaySound(_T("attack.wav"), SND_ASYNC);
-				Sleep(1500);
+				Sleep(1200);
 				sndPlaySound(_T("battle cut2.wav"), SND_ASYNC);
 				dmi = calcDamage(ene.attack, defenceplayer(dt));
 				printw("\t\t%d のダメージをうけた！\n", dmi);
@@ -646,6 +692,34 @@ void levelup(player_t* dt)
 	dt->speed += dt->g_rate*2;
 }
 
+void save_menu(player_t* pt) {
+    printw("\t\tセーブスロットを選んでください\n");
+    for (int i = 1; i <= 3; ++i) {
+        char filename[30];
+        snprintf(filename, sizeof(filename), "save%d.txt", i);
+        FILE* fp = fopen(filename, "r");
+        if (fp) {
+            fclose(fp);
+            printw("\t\t%d : 上書き（スロット%d）\n", i, i);
+        } else {
+            printw("\t\t%d : 新規作成（スロット%d）\n", i, i);
+        }
+    }
+
+    int ch = '0';
+    while (ch < '1' || ch > '3') {
+        ch = wgetch(stdscr);
+    }
+
+    int selected = ch - '0'; //ASCII⇒int
+    char filename[30];
+    snprintf(filename, sizeof(filename), "save%d.txt", selected);
+    printfile(filename, pt);
+
+    printw("\t\tスロット%dにセーブしました\n", selected);
+    (void)wgetch(stdscr);
+}
+
 void printfile(char name[], player_t* pt)
 {
 	FILE* fp;
@@ -731,8 +805,8 @@ void save(player_t* pt)
     printw("		1 : はい\n		2 : いいえ\n"); refresh();
     if (choose_yes())
     {
-        printfile("savedata", pt);
-        printw("		セーブしました!\n"); refresh();
+        save_menu(pt);
+        // printw("		セーブしました!\n"); refresh();
         (void)wgetch(stdscr);
     }
 }
@@ -773,3 +847,4 @@ void StopSound(void)
 {
     sndPlaySound(NULL, SND_ASYNC);
 }
+
