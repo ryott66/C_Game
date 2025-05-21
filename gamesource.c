@@ -20,7 +20,7 @@ typedef enum {
 	MAP1 = 1
 } MAPTYPE;
 
-//05/16: gcc gamesource.c gameheader.c gameio.c -o game.exe -L/mingw64/lib -lpdcurses -lwinmm
+//05/16: gcc gamesource.c gameheader.c -o game.exe -L/mingw64/lib -lpdcurses -lwinmm
 
 int main(void)
 {

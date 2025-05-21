@@ -562,7 +562,7 @@ player_t* createPlayer(char name[], int id)
 {
 	player_t* pt = NULL;
 	pt = (player_t*)calloc(1, sizeof(player_t));//callocは領域確保の後、最初のアドレスが返ってくる。→「player_tのアドレス」の型で返ってくるようにキャストする
-	sprintf(pt->name, "%s", name);
+	snprintf(pt->name, sizeof(pt->name),"%s", name);
 	pt->id = id;
 	pt->level = 1;
 	pt->mp = MPFIR;
@@ -595,10 +595,10 @@ player_t* createPlayer(char name[], int id)
 	pt->shield.type = NOEQUIP;
 	pt->helmet.type = NOEQUIP;
 	char noeq[64] = "なし";
-	sprintf(pt->weapon.name, "%s", noeq);
-	sprintf(pt->armor.name, "%s", noeq);
-	sprintf(pt->shield.name, "%s", noeq);
-	sprintf(pt->helmet.name, "%s", noeq);
+	snprintf(pt->weapon.name, sizeof(pt->weapon.name), "%s", noeq);
+	snprintf(pt->armor.name, sizeof(pt->armor.name), "%s", noeq);
+	snprintf(pt->shield.name, sizeof(pt->shield.name), "%s", noeq);
+	snprintf(pt->helmet.name, sizeof(pt->helmet.name), "%s", noeq);
 	pt->next = NULL;
 	pt->prev = NULL;
 
