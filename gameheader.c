@@ -54,9 +54,9 @@ void printTitle()
 void prologue(){
 	clear();
 	refresh();
-	sndPlaySound(_T("war.wav"), SND_ASYNC); //Play sound
+	sndPlaySound(_T("Sound/war.wav"), SND_ASYNC);
 	Sleep(5000);
-	sndPlaySound(_T("warfight.wav"), SND_ASYNC); //Play sound
+	sndPlaySound(_T("Sound/warfight.wav"), SND_ASYNC);
 	Sleep(3500);
 	StopSound();
 	printw("\t\t勇者 : うっ...");
@@ -66,13 +66,13 @@ void prologue(){
 	refresh();
 
 	Sleep(1000);
-	sndPlaySound(_T("todome.wav"), SND_ASYNC); //Play sound
+	sndPlaySound(_T("Sound/todome.wav"), SND_ASYNC);
 	Sleep(3500);
 	(void)wgetch(stdscr);
 	clear();       // PDCurses の画面クリア
 	refresh();     // 表示を更新
 
-	sndPlaySound(_T("bgm1.wav"), SND_ASYNC); //Play sound
+	sndPlaySound(_T("Sound/bgm1.wav"), SND_ASYNC);
 	printw("\n\t\t200年前、勇者は魔王に敗れ、魔族の時代がはじまりました。\n");
 	refresh();
 	Sleep(2500);
@@ -253,7 +253,7 @@ void runBattle(player_t* dt,int maptype)
 		break;
 	default:;
 	}
-	sndPlaySound(_T("battle.wav"), SND_ASYNC); //Play sound
+	sndPlaySound(_T("Sound/battle.wav"), SND_ASYNC);
 	pushenter();
 	int dme = 0, dmi = 0; //"damage" to enemy from me and to me from enemy
 	int type;//up or down gobrin turn
@@ -291,9 +291,9 @@ void runBattle(player_t* dt,int maptype)
 		case ONE:
 			printw("\t\t%sをこうげきした！\n\n", ene.name);
 			refresh();
-			sndPlaySound(_T("attack.wav"), SND_ASYNC);
+			sndPlaySound(_T("Sound/attack.wav"), SND_ASYNC);
 			Sleep(1200);
-			sndPlaySound(_T("battle cut.wav"), SND_ASYNC);
+			sndPlaySound(_T("Sound/battle cut.wav"), SND_ASYNC);
 			dme = calcDamage(attackplayer(dt),ene.defence);
 			printw("\t\t%s (HP: %d) に %d のダメージ！\n", ene.name, ene.hp, dme);
 			refresh();
@@ -302,9 +302,9 @@ void runBattle(player_t* dt,int maptype)
 			break;
 		case TWO:
 			printw("\t\tぼうぎょをかためた！\n");
-			sndPlaySound(_T("buf.wav"), SND_ASYNC);
+			sndPlaySound(_T("Sound/buf.wav"), SND_ASYNC);
 			Sleep(1200);
-			sndPlaySound(_T("battle cut.wav"), SND_ASYNC);
+			sndPlaySound(_T("Sound/battle cut.wav"), SND_ASYNC);
 
 			refresh();
 			if (cti2 == 0) {
@@ -322,9 +322,9 @@ void runBattle(player_t* dt,int maptype)
 			dt->mp -= MP_MAGIC;
 			printw("\t\tこうげきまほうをとなえた！\n");
 			refresh();
-			sndPlaySound(_T("explosion.wav"), SND_ASYNC);
+			sndPlaySound(_T("Sound/explosion.wav"), SND_ASYNC);
 			Sleep(1200);
-			sndPlaySound(_T("battle cut.wav"), SND_ASYNC);
+			sndPlaySound(_T("Sound/battle cut.wav"), SND_ASYNC);
 			dme = (double)calcDamage(attackplayer(dt), ene.defence) * EFFECT_MAGIC;
 			printw("\t\t%s (HP: %d) に %d のダメージ！\n", ene.name, ene.hp, dme);
 			refresh();
@@ -334,7 +334,7 @@ void runBattle(player_t* dt,int maptype)
 		case FOUR:
 			printw("\t\t%sからにげだした…\n", ene.name);
 			refresh();
-			sndPlaySound(_T("game over.wav"), SND_ASYNC);
+			sndPlaySound(_T("Sound/game over.wav"), SND_ASYNC);
 			(void)wgetch(stdscr);
 			return;
 		default:;
@@ -346,11 +346,11 @@ void runBattle(player_t* dt,int maptype)
 				if (rand_n(2) == 1) {// enemy does normal attack for 1/2 
 					printw("\t\t%sのこうげき！\n", ene.name);
 					refresh();
-					sndPlaySound(_T("goblin.wav"), SND_ASYNC); //Play sound
+					sndPlaySound(_T("Sound/goblin.wav"), SND_ASYNC);
 					Sleep(1000);
-					sndPlaySound(_T("attack.wav"), SND_ASYNC);
+					sndPlaySound(_T("Sound/attack.wav"), SND_ASYNC);
 					Sleep(1200);;
-					sndPlaySound(_T("battle cut2.wav"), SND_ASYNC);
+					sndPlaySound(_T("Sound/battle cut2.wav"), SND_ASYNC);
 					dmi = calcDamage(ene.attack,defenceplayer(dt));
 					printw("\t\t%d のダメージをうけた！\n", dmi);
 					refresh();
@@ -361,9 +361,9 @@ void runBattle(player_t* dt,int maptype)
 					case 1:
 						printw("\t\t%sはスワップをつかった！\n", ene.name);
 						refresh();
-						sndPlaySound(_T("gobmagic.wav"), SND_ASYNC);
+						sndPlaySound(_T("Sound/gobmagic.wav"), SND_ASYNC);
 						Sleep(3000);
-						sndPlaySound(_T("battle cut2.wav"), SND_ASYNC);
+						sndPlaySound(_T("Sound/battle cut2.wav"), SND_ASYNC);
 						Sleep(1200);
 						swap(&dt->hp, &dt->mp);
 						printw("\t\tHPとMPが入れかわった！\n\t\tHP(%d) MP(%d)\n", dt->hp, dt->mp);
@@ -376,9 +376,9 @@ void runBattle(player_t* dt,int maptype)
 						rn_db = rand_n(2) - 1;   //  (1 or 2)-1  →　(0 or 1)
 						if (cte2 == 0) {
 							if (doublepower(&ene.attack, &ene.defence, rn_db)) {
-								sndPlaySound(_T("gobmagic.wav"), SND_ASYNC);
+								sndPlaySound(_T("Sound/gobmagic.wav"), SND_ASYNC);
 								Sleep(3000);
-								sndPlaySound(_T("battle cut.wav"), SND_ASYNC);
+								sndPlaySound(_T("Sound/battle cut.wav"), SND_ASYNC);
 								Sleep(1200);
 								printw("\t\t%sのこうげき力とぼうぎょ力が2倍になった！\n", ene.name);
 								refresh();
@@ -399,9 +399,9 @@ void runBattle(player_t* dt,int maptype)
 						printw("\t\t%sはパワーアップをつかった！\n", ene.name);
 						refresh();
 						if (cte3 == 0) {
-							sndPlaySound(_T("gobmagic.wav"), SND_ASYNC);
+							sndPlaySound(_T("Sound/gobmagic.wav"), SND_ASYNC);
 							Sleep(3000);
-							sndPlaySound(_T("battle cut2.wav"), SND_ASYNC);
+							sndPlaySound(_T("Sound/battle cut2.wav"), SND_ASYNC);
 							Sleep(1200);
 							type = DEF_UP;
 							changeParam(&ene.attack, type);
@@ -418,9 +418,9 @@ void runBattle(player_t* dt,int maptype)
 						printw("\t\t%sはダウンを使った！\n", ene.name);
 						refresh();
 						if (cte4 == 0) {
-							sndPlaySound(_T("gobmagic.wav"), SND_ASYNC);
+							sndPlaySound(_T("Sound/gobmagic.wav"), SND_ASYNC);
 							Sleep(3000);
-							sndPlaySound(_T("battle cut.wav"), SND_ASYNC);
+							sndPlaySound(_T("Sound/battle cut.wav"), SND_ASYNC);
 							Sleep(1200);
 							type = DEF_DOWN;
 							changeParam(&dt->protect, type);
@@ -440,9 +440,9 @@ void runBattle(player_t* dt,int maptype)
 			else {
 				printw("\t\t%sのこうげき！\n", ene.name);
 				refresh();
-				sndPlaySound(_T("attack.wav"), SND_ASYNC);
+				sndPlaySound(_T("Sound/attack.wav"), SND_ASYNC);
 				Sleep(1200);
-				sndPlaySound(_T("battle cut2.wav"), SND_ASYNC);
+				sndPlaySound(_T("Sound/battle cut2.wav"), SND_ASYNC);
 				dmi = calcDamage(ene.attack, defenceplayer(dt));
 				printw("\t\t%d のダメージをうけた！\n", dmi);
 				refresh();
@@ -452,7 +452,7 @@ void runBattle(player_t* dt,int maptype)
 			if (dt->hp <= 0) {  //if player is killed, program should finish.
 				printw("\t\t%sにやられてしまった…\n", ene.name);
 				refresh();
-				sndPlaySound(_T("game over.wav"), SND_ASYNC);
+				sndPlaySound(_T("Sound/game over.wav"), SND_ASYNC);
 				(void)wgetch(stdscr);
 				printw("\t\tこの世界の勇者ではなかったようだ…\n");
 				refresh();
@@ -466,7 +466,7 @@ void runBattle(player_t* dt,int maptype)
 		else {}
 	}
 	printw("\t\t敵をたおした！\n");//if enemy is dead, player don't have to repeat choice because of "for sentence".
-	sndPlaySound(_T("win.wav"), SND_ASYNC);
+	sndPlaySound(_T("Sound/win.wav"), SND_ASYNC);
 	if (cte4 == 1) {
 		dt->protect *= 2;
 	}
@@ -483,7 +483,7 @@ void runBattle(player_t* dt,int maptype)
 		refresh();
 		levelup(dt);
 		print_player(*dt);
-		sndPlaySound(_T("levelup.wav"), SND_ASYNC);
+		sndPlaySound(_T("Sound/levelup.wav"), SND_ASYNC);
 	}
 	(void)wgetch(stdscr);
 	return;
@@ -567,39 +567,39 @@ void changeParam(int* dt, int type)
 
 void print_player(player_t dt1)
 {
-    printw("		id：%d\n", dt1.id); refresh();
-    printw("		なまえ：%s\n", dt1.name); refresh();
-    printw("		レベル：%d\n", dt1.level); refresh();
-    printw("		HP：%d\n", dt1.hp); refresh();
-    printw("		MP：%d\n", dt1.mp); refresh();
-    printw("		こうげき力：%d\n", dt1.power); refresh();
-    printw("		ぼうぎょ力：%d\n", dt1.protect); refresh();
-    printw("		スピード：%d\n", dt1.speed); refresh();
-    printw("		経験値：%d\n", dt1.exp); refresh();
-    printw("		成長率：%lf\n", dt1.g_rate); refresh();
+    printw("\t\tid：%d\n", dt1.id); refresh();
+    printw("\t\tなまえ：%s\n", dt1.name); refresh();
+    printw("\t\tレベル：%d\n", dt1.level); refresh();
+    printw("\t\tHP：%d\n", dt1.hp); refresh();
+    printw("\t\tMP：%d\n", dt1.mp); refresh();
+    printw("\t\tこうげき力：%d\n", dt1.power); refresh();
+    printw("\t\tぼうぎょ力：%d\n", dt1.protect); refresh();
+    printw("\t\tスピード：%d\n", dt1.speed); refresh();
+    printw("\t\t経験値：%d\n", dt1.exp); refresh();
+    printw("\t\t成長率：%lf\n", dt1.g_rate); refresh();
     if (dt1.weapon.type == NOEQUIP) {
-        printw("		武器：なし\n"); refresh();
+        printw("\t\t武器：なし\n"); refresh();
     } else {
-        printw("		武器：%s\n", dt1.weapon.name); refresh();
-        printw("		つよさ：%d\n", dt1.weapon.point); refresh();
+        printw("\t\t武器：%s\n", dt1.weapon.name); refresh();
+        printw("\t\tつよさ：%d\n", dt1.weapon.point); refresh();
     }
     if (dt1.armor.type == NOEQUIP) {
-        printw("		服：なし\n"); refresh();
+        printw("\t\t服：なし\n"); refresh();
     } else {
-        printw("		服：%s\n", dt1.armor.name); refresh();
-        printw("		つよさ:%d\n", dt1.armor.point); refresh();
+        printw("\t\t服：%s\n", dt1.armor.name); refresh();
+        printw("\t\tつよさ:%d\n", dt1.armor.point); refresh();
     }
     if (dt1.shield.type == NOEQUIP) {
-        printw("		盾：なし\n"); refresh();
+        printw("\t\t盾：なし\n"); refresh();
     } else {
-        printw("		盾：%s\n", dt1.shield.name); refresh();
-        printw("		つよさ：%d\n", dt1.shield.point); refresh();
+        printw("\t\t盾：%s\n", dt1.shield.name); refresh();
+        printw("\t\tつよさ：%d\n", dt1.shield.point); refresh();
     }
     if (dt1.helmet.type == NOEQUIP) {
-        printw("		ヘルメット：なし\n"); refresh();
+        printw("\t\tヘルメット：なし\n"); refresh();
     } else {
-        printw("		ヘルメット：%s\n", dt1.helmet.name); refresh();
-        printw("		つよさ：%d\n", dt1.helmet.point); refresh();
+        printw("\t\tヘルメット：%s\n", dt1.helmet.name); refresh();
+        printw("\t\tつよさ：%d\n", dt1.helmet.point); refresh();
     }
     printw("\n\n"); refresh();
 }
@@ -693,29 +693,55 @@ void levelup(player_t* dt)
 }
 
 void save_menu(player_t* pt) {
-    printw("\t\tセーブスロットを選んでください\n");
-    for (int i = 1; i <= 3; ++i) {
-        char filename[30];
-        snprintf(filename, sizeof(filename), "save%d.txt", i);
-        FILE* fp = fopen(filename, "r");
-        if (fp) {
-            fclose(fp);
-            printw("\t\t%d : 上書き（スロット%d）\n", i, i);
-        } else {
-            printw("\t\t%d : 新規作成（スロット%d）\n", i, i);
-        }
-    }
-
-    int ch = '0';
-    while (ch < '1' || ch > '3') {
-        ch = wgetch(stdscr);
-    }
-
-    int selected = ch - '0'; //ASCII⇒int
+	bool savecheck=false;
     char filename[30];
-    snprintf(filename, sizeof(filename), "save%d.txt", selected);
-    printfile(filename, pt);
+    int selected =0; //ASCII⇒int
 
+
+	while(savecheck==false){
+    	printw("\t\tセーブスロットを選んでください\n");
+    	for (int i = 1; i <= 3; ++i) {
+    	    char filename[30];
+    	    snprintf(filename, sizeof(filename), "save%d.txt", i);
+    	    FILE* fp = fopen(filename, "r");
+    	    if (fp) {
+    	        player_t tmp; //簡易的なセーブデータ読み出し(name & level) ファイルから一個ずつ読み込むからidも必要
+    	        fscanf(fp, "%d", &tmp.id);
+    	        fscanf(fp, "%s", tmp.name);
+    	        fscanf(fp, "%d", &tmp.level);
+    	        fclose(fp);
+    	        printw("\t\t%d : 上書き（スロット%d） → %s（Lv.%d）\n", i, i, tmp.name, tmp.level);
+    	    } else {
+    	        printw("\t\t%d : 新規作成（スロット%d）\n", i, i);
+    	    }
+    	}
+
+    	int ch = '0';
+    	while (ch < '1' || ch > '3') {
+    	    ch = wgetch(stdscr);
+    	}
+
+    	selected = ch - '0'; //ASCII⇒int
+    	snprintf(filename, sizeof(filename), "save%d.txt", selected);
+		//上書き確認
+    	FILE* fp_check = fopen(filename, "r");
+    	if (fp_check) {
+    	    fclose(fp_check);
+    	    printw("\t\tこのスロットにはすでにセーブがあります。\n");
+    	    printw("\t\t上書きしてもよろしいですか？\n");
+    	    printw("\t\t1 : はい\n\t\t2 : いいえ\n");
+    	    refresh();
+    	    if (!choose_yes()) {
+    	        printw("\t\tセーブをキャンセルしました。\n");
+    		}else{
+				savecheck=true;
+			}
+    	}else{
+			savecheck=true;
+		}
+	}
+
+    printfile(filename, pt);
     printw("\t\tスロット%dにセーブしました\n", selected);
     (void)wgetch(stdscr);
 }
@@ -779,7 +805,7 @@ player_t* scanfile(char name[], player_t* pt)
 		fclose(fp);
 	}
 	else {
-		printw("セーブデータが見つかりません\n");
+		printw("\t\tセーブデータが見つかりません\n");
 	}
 
 	return pt;
@@ -801,8 +827,8 @@ int mpmax(player_t* dt)
 
 void save(player_t* pt)
 {
-    printw("		セーブしますか?\n"); refresh();
-    printw("		1 : はい\n		2 : いいえ\n"); refresh();
+    printw("\t\tセーブしますか?\n"); refresh();
+    printw("\t\t1 : はい\n		2 : いいえ\n"); refresh();
     if (choose_yes())
     {
         save_menu(pt);

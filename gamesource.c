@@ -50,7 +50,7 @@ int main(void)
 
 	setlocale(LC_ALL, "");
 	printTitle();
-	sndPlaySound(_T("start.wav"), SND_ASYNC| SND_LOOP);
+	sndPlaySound(_T("Sound/start.wav"), SND_ASYNC| SND_LOOP);
 	Sleep(3000);
 	(void)wgetch(stdscr); //wait key
 	clear();       // PDCurses の画面クリア
@@ -75,12 +75,18 @@ int main(void)
     	snprintf(filename, sizeof(filename), "save%d.txt", i);
     	FILE* fp = fopen(filename, "r");
     	if (fp) {
+			player_t tmp;  //簡易情報をtmpに読み込んで表示
+        	fscanf(fp, "%d", &tmp.id);
+        	fscanf(fp, "%s", tmp.name);
+        	fscanf(fp, "%d", &tmp.level);
     	    fclose(fp);
-    	    printw("\t\t%d : セーブポイント%d\n", i, i);
+        	printw("\t\t%d : セーブポイント%d → %s（Lv.%d）\n", i, i, tmp.name, tmp.level);
 			refresh();
-    	}else{
-			// NR
-		}
+
+    	} else {
+        	printw("\t\t%d : セーブポイント%d → 空きスロット\n", i, i);
+			refresh();
+    	}
 	}
 
 	int choice = 0;
@@ -90,6 +96,7 @@ int main(void)
 
 	if (choice == '0') {  // 最初から
 	    printw("\t\tユーザー名を入力してください\n\t\tなまえ : ");
+		refresh();
 	    char name[16];
 	    wgetnstr(stdscr, name, sizeof(name) - 1);
 	    you = createPlayer(name, 0); // ユーザのIDは0
@@ -119,8 +126,7 @@ int main(void)
 		pushenter();
 	}
 
-	sndPlaySound(_T("bgm1.wav"), SND_ASYNC); //Play sound
-
+	sndPlaySound(_T("Sound/bgm1.wav"), SND_ASYNC);
 
 
 	char map[][MAP_MAXLEN + 1] = {
@@ -165,7 +171,6 @@ int main(void)
 	int tmpx = 0, tmpy = 0;
 	MAPTYPE maptype = MAP0; //初期化
 
-//	sndPlaySound(_T("bgm1.wav"), SND_ASYNC); //Play sound
 	for (; p_x != mapWidth-2;) {//町を出るまで繰り返し
 			maptype = MAP0;
 			map[p_y][p_x] = player[0];
@@ -267,7 +272,7 @@ int main(void)
 				else {
 					//NR
 				}
-				sndPlaySound(_T("bgm1.wav"), SND_ASYNC); //Play sound
+				sndPlaySound(_T("Sound/bgm1.wav"), SND_ASYNC);
 
 			}
 			else {
@@ -318,7 +323,7 @@ int main(void)
 	mapHeight1 = sizeof(map1) / sizeof(map1[0]);
 	p_y = 11;
 	p_x = 2;//player first position (11,2)
-	sndPlaySound(_T("adventure.wav"), SND_ASYNC); 
+	sndPlaySound(_T("Sound/adventure.wav"), SND_ASYNC); 
 	for (; p_y != 0 && p_x != mapWidth1 - 1 ;) {
 		maptype = MAP1;
 		map1[p_y][p_x] = player[0];
@@ -381,7 +386,7 @@ int main(void)
 			else {
 				//NR
 			}
-			sndPlaySound(_T("adventure.wav"), SND_ASYNC); //Play sound
+			sndPlaySound(_T("Sound/adventure.wav"), SND_ASYNC);
 		}
 		else {
 			//NR
