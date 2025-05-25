@@ -1,5 +1,4 @@
 #include <stdbool.h>
-
 #pragma once
 
 #define ONE 0x31
@@ -10,10 +9,6 @@
 
 #define STR_MAX 256 //静的配列サイズ定義に使う
 #define MAP_MAXLEN 80
-
-static const int HPFIR=35;//HP at first
-static const int MPFIR=30;// MP at first
-static const int SIZEMAX=20; //char_size
 
 typedef enum {
     NOEQUIP = 0,
@@ -57,6 +52,12 @@ typedef struct enemy {
 	int defence;
 	int exp;
 }enemy_t;
+
+static const equip_t NORMAL_SWORD = {WEAPON, "普通の剣", 3, 8, 23};
+static const int HPFIR=35;//HP at first
+static const int MPFIR=30;// MP at first
+static const int SIZEMAX=20; //char_size
+
 
 void printTitle();
 void prologue();

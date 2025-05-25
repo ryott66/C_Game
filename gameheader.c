@@ -275,7 +275,7 @@ void runBattle(player_t* dt,int maptype)
 		printw("\t\t1.こうげき\n\t\t2.ぼうぎょ\n\t\t3.まほう (消費MP: %d)\n\t\t4.にげる\n\n\n",MP_MAGIC);
 		refresh();
 		ch1 = '0';
-		while (ch1 < '1' || ch1 > '3') {  //wgetchはASCIIをintで返す⇒"1"は49, "3"は51
+		while (ch1 < '1' || ch1 > '4') {  //wgetchはASCIIをintで返す⇒"1"は49, "3"は51
     		ch1 = wgetch(stdscr);
 		}
 		if (dt->mp < MP_MAGIC && ch1 == THREE) {
@@ -518,7 +518,7 @@ void printMap(char map[][MAP_MAXLEN + 1], int row, int column)
     for (int i = 0; i < row; i++) {
         move(i + margin_top, margin_left);  // 各行の先頭位置を調整
         for (int j = 0; j < strlen(map[i]); j++) {
-            addch(map[i][j]);
+            printw("%c", map[i][j]);
         }
     }
 
