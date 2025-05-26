@@ -1,12 +1,12 @@
-﻿#include"gameheader.h"
-#include<stdio.h>
-#include<stdlib.h>
+﻿#include "gameheader.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include<tchar.h>
+#include <tchar.h>
 
-#include<windows.h> //for windows HANDL
-#include<mmsystem.h>
+#include <windows.h> //for windows HANDL
+#include <mmsystem.h>
 #pragma comment(lib,"Winmm.lib") //for windows sndPlay .
 #include <pdcurses.h>
 
@@ -14,8 +14,6 @@
 #define ENEMY2 "いぬ"
 #define ENEMY3 "かいじん"
 #define ENEMY4 "ゴブリン"
-
-
 
 
 static const int DEF_UP = 0;

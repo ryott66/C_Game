@@ -1,13 +1,13 @@
-﻿#include<stdio.h>
-#include<windows.h>
-#include<mmsystem.h>
-#include<tchar.h>
+﻿#include <stdio.h>
+#include <windows.h>
+#include <mmsystem.h>
+#include <tchar.h>
 #include <locale.h>
 #pragma comment(lib,"Winmm.lib")
-#include<stdlib.h>
-#include<time.h>
+#include <stdlib.h>
+#include <time.h>
 #include <pdcurses.h>
-#include"gameheader.h"
+#include "gameheader.h"
 
 
 

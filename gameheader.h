@@ -5,7 +5,6 @@
 #define TWO 0x32
 #define THREE 0x33
 #define FOUR 0x34
-#define ENTER 0x0d
 
 #define STR_MAX 256 //静的配列サイズ定義に使う
 #define MAP_MAXLEN 80

@@ -2,6 +2,7 @@
     "files.associations": {
         "assert.h": "c",
         "flat_set": "c",
-        "pdcurses.h": "c"
+        "pdcurses.h": "c",
+        "stdlib.h": "c"
     }
 }
